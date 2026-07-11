@@ -14,9 +14,9 @@ import VintageGlowingBulb from "./components/VintageGlowingBulb";
 
 // Dynamic Generated Image Paths
 const IMAGES = {
-  coffeeShopStreet: "/src/assets/images/coffee_shop_sketch_1783712682758.jpg",
-  openNotebookJournal: "/src/assets/images/journal_notes_illustration_1783712695398.jpg",
-  topDownLatte: "/src/assets/images/coffee_latte_cup_1783712708068.jpg"
+  coffeeShopStreet: "https://res.cloudinary.com/vvgr7lqm/image/upload/v1783778579/coffee_shop_sketch_1783712682758_o5sjkt.jpg",
+  openNotebookJournal: "https://res.cloudinary.com/vvgr7lqm/image/upload/v1783778575/journal_notes_illustration_1783712695398_m2tzyi.jpg",
+  topDownLatte: "https://res.cloudinary.com/vvgr7lqm/image/upload/v1783778586/coffee_latte_cup_1783712708068_ua6zbn.jpg"
 };
 
 // Design system data
