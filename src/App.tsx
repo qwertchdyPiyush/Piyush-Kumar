@@ -248,6 +248,52 @@ export default function App() {
   // Ambient falling leaves state
   const [ambientLeaves, setAmbientLeaves] = useState<{ id: number; left: number; scale: number; duration: number; delay: number }[]>([]);
 
+  // Audio state for background ambiance (Cozy Rain/Coffee Shop)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio();
+    audio.src = "https://res.cloudinary.com/vvgr7lqm/video/upload/v1783777020/Monsoon_Coffee_Room_kjlgmu.mp3";
+    audio.loop = true;
+    audio.volume = 0.5; // 50% volume as requested
+    audioRef.current = audio;
+
+    // Sync play state on initial load
+    if (isAudioPlaying) {
+      audio.play().catch((err) => {
+        console.log("Autoplay blocked by browser. Interaction required to start background ambiance.", err);
+      });
+    }
+
+    // Modern browsers require interaction to play audio.
+    // Trigger play upon any interaction (like a click) anywhere on the page.
+    const handleFirstInteraction = () => {
+      if (isAudioPlaying && audio.paused) {
+        audio.play().catch(() => {});
+      }
+      window.removeEventListener("click", handleFirstInteraction);
+    };
+    window.addEventListener("click", handleFirstInteraction);
+
+    return () => {
+      audio.pause();
+      window.removeEventListener("click", handleFirstInteraction);
+    };
+  }, []);
+
+  // Sync isAudioPlaying state changes to actual audio play/pause controls
+  useEffect(() => {
+    if (!audioRef.current) return;
+    if (isAudioPlaying) {
+      audioRef.current.play().catch((err) => {
+        console.log("Audio play blocked on state sync. Waiting for interaction.", err);
+      });
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isAudioPlaying]);
+
   // Page flip transition queue state
   interface FlipItem {
     id: number;
@@ -753,10 +799,30 @@ export default function App() {
       </AnimatePresence>
                 {/* -------------------- WORKBENCH HEADER & NAVIGATION TABS -------------------- */}
       <div className="max-w-7xl mx-auto mb-6 text-center click-surface relative z-10 flex flex-col items-center">
-        {/* Editorial Vintage Crest */}
-        <div className="w-11 h-11 rounded-full border border-coffee-foam/40 flex items-center justify-center mb-3 text-coffee-foam/80 font-serif italic text-base select-none">
+        {/* Editorial Vintage Crest & Background Ambiance Toggle */}
+        <motion.button
+          onClick={() => setIsAudioPlaying(!isAudioPlaying)}
+          whileHover={{ scale: 1.1, borderColor: "#C8A27A" }}
+          whileTap={{ scale: 0.95 }}
+          className={`w-11 h-11 rounded-full border flex items-center justify-center mb-3 font-serif italic text-base select-none transition-all duration-300 relative cursor-pointer ${
+            isAudioPlaying
+              ? "border-[#C8A27A] text-[#C8A27A] bg-coffee-dark/40 shadow-[0_0_12px_rgba(200,162,122,0.35)]"
+              : "border-coffee-foam/30 text-coffee-foam/50 bg-transparent hover:text-coffee-foam/80"
+          }`}
+          title={isAudioPlaying ? "Mute Background Ambiance" : "Play Background Ambiance"}
+        >
           Ω
-        </div>
+          
+          {/* Subtle status indicator dot */}
+          <span className={`absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full border border-[#1C140E] transition-all duration-300 ${
+            isAudioPlaying ? "bg-emerald-500 animate-pulse" : "bg-amber-600/60"
+          }`} />
+
+          {/* Pulse Ripple Effect when active */}
+          {isAudioPlaying && (
+            <span className="absolute inset-0 rounded-full border border-[#C8A27A]/25 animate-ping pointer-events-none" style={{ animationDuration: "3s" }} />
+          )}
+        </motion.button>
         
         <h1 className="font-serif text-3xl md:text-[2.6rem] font-semibold text-[#FDFBF7] tracking-tight leading-tight select-none flex items-center gap-2">
           <span className="font-light italic text-[#C8A27A]">The</span> Quiet Engineer
