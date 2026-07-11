@@ -1,0 +1,559 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Custom palette colors */
+  --color-coffee-bg: #F8F4EC;
+  --color-coffee-cream: #F6F1E8;
+  --color-coffee-ivory: #EFE7D8;
+  --color-coffee-paper: #E9DFC9;
+  --color-coffee-foam: #D7C2A4;
+  --color-coffee-latte: #C8A27A;
+  --color-coffee-caramel: #A97042;
+  --color-coffee-brown: #6F4E37;
+  --color-coffee-dark: #3B2B24;
+  --color-coffee-forest: #4A6446;
+  --color-coffee-black: #1E1C1A;
+}
+
+::selection {
+  background-color: #C8A27A;
+  color: #3B2B24;
+}
+
+/* Editorial Aesthetic core classes */
+.paper-texture {
+  background-color: #F8F4EC;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  opacity: 0.98;
+}
+
+.deckled-edge {
+  clip-path: polygon(0% 0%, 100% 1%, 99% 15%, 100% 30%, 98% 45%, 100% 60%, 99% 75%, 100% 90%, 98% 100%, 0% 99%, 1% 85%, 0% 70%, 2% 55%, 0% 40%, 1% 25%, 0% 10%);
+}
+
+.coffee-stain {
+  background: radial-gradient(circle, rgba(169, 112, 66, 0.15) 0%, rgba(169, 112, 66, 0.05) 50%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(8px);
+}
+
+.wooden-desk {
+  background-color: #3B2B24;
+  background-image: linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.02) 100%), linear-gradient(rgba(0,0,0,0.2) 0%, transparent 100%);
+}
+
+/* Tactile Materials & Handcrafted paper textures */
+.paper-fiber-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Watercolor / pulp paper wash */
+.watercolor-paper {
+  background-color: var(--color-coffee-cream);
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(215, 194, 164, 0.15) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(200, 162, 122, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 10%, rgba(74, 100, 70, 0.04) 0px, transparent 40%);
+  position: relative;
+  box-shadow: 
+    0 1px 2px rgba(30, 28, 26, 0.05),
+    0 4px 12px rgba(30, 28, 26, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.aged-journal {
+  background-color: var(--color-coffee-ivory);
+  background-image: 
+    linear-gradient(rgba(111, 78, 55, 0.02) 1px, transparent 1px),
+    radial-gradient(at 80% 20%, rgba(169, 112, 66, 0.08) 0px, transparent 60%);
+  position: relative;
+  box-shadow: 
+    0 2px 4px rgba(30, 28, 26, 0.06),
+    0 10px 20px rgba(30, 28, 26, 0.1),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Torn / deckled edge generators */
+.torn-edge-left {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 100%, 0% 100%, 
+    1.2% 95%, 0.4% 90%, 1.8% 85%, 0.8% 80%, 1.5% 75%, 0.5% 70%, 1.7% 65%, 0.9% 60%,
+    1.4% 55%, 0.4% 50%, 1.6% 45%, 0.6% 40%, 1.3% 35%, 0.5% 30%, 1.8% 25%, 0.7% 20%,
+    1.5% 15%, 0.4% 10%, 1.2% 5%
+  );
+}
+
+.torn-edge-right {
+  clip-path: polygon(
+    0% 0%, 98.8% 0%, 
+    98.5% 5%, 99.6% 10%, 98.2% 15%, 99.3% 20%, 98.5% 25%, 99.5% 30%, 98.2% 35%, 99.4% 40%,
+    98.4% 45%, 99.6% 50%, 98.2% 55%, 99.1% 60%, 98.3% 65%, 99.5% 70%, 98.5% 75%, 99.2% 80%,
+    98.2% 85%, 99.6% 90%, 98.8% 95%, 
+    99.2% 100%, 0% 100%
+  );
+}
+
+.torn-edge-bottom {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 98.5%,
+    95% 98.8%, 90% 98.2%, 85% 99.3%, 80% 98.4%, 75% 99.5%, 70% 98.3%, 65% 99.1%, 60% 98.2%,
+    55% 99.4%, 50% 98.3%, 45% 99.5%, 40% 98.4%, 35% 99.2%, 30% 98.3%, 25% 99.5%, 20% 98.2%,
+    15% 99.4%, 10% 98.5%, 5% 99.2%, 
+    0% 98.5%
+  );
+}
+
+/* Beautiful custom coffee ring SVG background overlay */
+.coffee-ring-overlay {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(111, 78, 55, 0.18);
+  filter: blur(0.5px);
+  pointer-events: none;
+}
+.coffee-ring-overlay::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  right: 2px;
+  bottom: 4px;
+  border-radius: 50%;
+  border: 0.8px solid rgba(111, 78, 55, 0.12);
+  filter: blur(1px);
+}
+
+/* Ambient Morning Sun Ray Effect */
+.ambient-sunlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(135deg, rgba(255, 244, 215, 0.18) 0%, rgba(255, 230, 180, 0.05) 40%, transparent 80%);
+  mix-blend-mode: soft-light;
+}
+
+/* Steam animation for Coffee Cup */
+@keyframes steamAnimation {
+  0% {
+    transform: translateY(0) scaleX(0.8) scaleY(1);
+    opacity: 0;
+    filter: blur(1px);
+  }
+  15% {
+    opacity: 0.35;
+    filter: blur(1.5px);
+  }
+  50% {
+    transform: translateY(-25px) scaleX(1.3) scaleY(1.1) rotate(5deg);
+    opacity: 0.18;
+    filter: blur(3px);
+  }
+  80% {
+    transform: translateY(-50px) scaleX(1.8) scaleY(1.3) rotate(-8deg);
+    opacity: 0.06;
+    filter: blur(5px);
+  }
+  100% {
+    transform: translateY(-70px) scaleX(2.2) scaleY(1.5);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+.steam-path {
+  animation: steamAnimation 5s ease-in-out infinite;
+}
+
+/* Dust particles floating */
+@keyframes floatDust {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-80px) translateX(30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.dust-particle {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background-color: var(--color-coffee-latte);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Coffee stain drops */
+.coffee-drop {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(111, 78, 55, 0.25);
+  position: absolute;
+  filter: blur(0.5px);
+}
+.coffee-drop::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 12px;
+  background-color: rgba(111, 78, 55, 0.08);
+  border-radius: 40%;
+  top: -2px;
+  left: -3px;
+  filter: blur(1px);
+}
+
+/* Wooden Desk Table Background texture */
+.wood-table-bg {
+  background-color: #3B2B24;
+  background-image: 
+    linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.02) 100%), 
+    linear-gradient(rgba(0,0,0,0.2) 0%, transparent 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 43, 36, 0.45) 0%, rgba(20, 16, 14, 0.98) 100%);
+  background-size: 100% 100%;
+  position: relative;
+}
+
+/* Paper shadow layers */
+.paper-shadow {
+  box-shadow: 
+    0 1px 2px rgba(30, 28, 26, 0.08),
+    0 6px 16px rgba(30, 28, 26, 0.12),
+    0 15px 35px rgba(30, 28, 26, 0.18),
+    0 0 1px rgba(30, 28, 26, 0.1);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-coffee-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-coffee-foam);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-coffee-latte);
+}
+
+/* Letterpress font styling */
+.letterpress-text {
+  color: var(--color-coffee-dark);
+  text-shadow: 0 0.5px 1px rgba(255, 255, 255, 0.5), 0 -0.5px 1px rgba(30, 28, 26, 0.15);
+}
+
+/* Wood border elements */
+.notebook-rings {
+  background-image: radial-gradient(circle, #555 40%, transparent 40%), radial-gradient(circle, #ccc 30%, transparent 30%);
+  background-size: 20px 20px;
+  background-position: 0 0, 5px 5px;
+}
+
+/* Floating leaf animation */
+@keyframes floatLeaf {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(120px, 180px) rotate(180deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.floating-leaf {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Custom coffee bean cursor */
+.cursor-bean {
+  width: 14px;
+  height: 20px;
+  background-color: var(--color-coffee-brown);
+  border-radius: 40% 40% 45% 45% / 50% 50% 50% 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 4px rgba(30, 28, 26, 0.3);
+}
+
+.cursor-bean::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 1.5px;
+  height: 20px;
+  background-color: #24160c;
+  opacity: 0.6;
+  border-radius: 50%;
+  transform: rotate(5deg);
+}
+
+/* Cursor trail */
+.cursor-ripple {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--color-coffee-latte);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0;
+}
+
+/* Notebook ruled line styling */
+.notebook-ruled {
+  background-image: linear-gradient(rgba(111, 78, 55, 0.08) 1px, transparent 1px);
+  background-size: 100% 24px;
+  line-height: 24px;
+}
+
+/* Notebook faint grid styling */
+.notebook-grid {
+  background-image: 
+    linear-gradient(rgba(111, 78, 55, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111, 78, 55, 0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Letterpress paper inset depth styling */
+.letterpress-paper {
+  background-color: var(--color-coffee-paper);
+  box-shadow: 
+    0 1px 2px rgba(30, 28, 26, 0.1),
+    inset 0 3px 6px rgba(30, 28, 26, 0.08),
+    inset 0 1px 2px rgba(30, 28, 26, 0.05);
+  border: 1px solid rgba(111, 78, 55, 0.12);
+}
+
+/* Washi tape visual simulator */
+.washi-tape {
+  position: absolute;
+  background-color: rgba(215, 194, 164, 0.45);
+  backdrop-filter: blur(0.5px);
+  border-left: 2px dashed rgba(111, 78, 55, 0.15);
+  border-right: 2px dashed rgba(111, 78, 55, 0.15);
+  box-shadow: 0 1px 2px rgba(30, 28, 26, 0.05);
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 10px);
+}
+
+/* Masking tape visual simulator */
+.masking-tape {
+  position: absolute;
+  background-color: rgba(239, 231, 216, 0.65);
+  backdrop-filter: blur(1px);
+  border: 1px solid rgba(111, 78, 55, 0.05);
+  box-shadow: 0 1px 3px rgba(30, 28, 26, 0.08);
+}
+
+/* Paper fold / wrinkle creases */
+.paper-fold-diagonal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(30, 28, 26, 0.02) 50%, rgba(30, 28, 26, 0.15) 51%, rgba(255, 255, 255, 0.25) 100%);
+  box-shadow: 2px 2px 5px rgba(30, 28, 26, 0.15);
+}
+
+.paper-crease-horizontal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(30, 28, 26, 0.06) 100%);
+  pointer-events: none;
+}
+
+/* Tea stains */
+.tea-stain {
+  background: radial-gradient(circle, rgba(169, 112, 66, 0.2) 0%, rgba(169, 112, 66, 0.08) 40%, rgba(169, 112, 66, 0.03) 70%, transparent 100%);
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Leather notebook spine pattern */
+.leather-spine {
+  background-color: #2D1F1A;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 100%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 12px);
+  box-shadow: 
+    inset -10px 0 15px rgba(0,0,0,0.5),
+    3px 0 8px rgba(0,0,0,0.3);
+}
+
+/* High-fidelity fluid leaf falling keyframes - Variant 1 (Gentle sway right-to-left) */
+@keyframes floatLeafFluid1 {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  30% {
+    transform: translate3d(60px, 25vh, 0) rotate(45deg) scale(0.9) rotateY(30deg);
+  }
+  60% {
+    transform: translate3d(-50px, 60vh, 0) rotate(110deg) scale(1) rotateY(-30deg);
+  }
+  85% {
+    transform: translate3d(30px, 85vh, 0) rotate(175deg) scale(0.85) rotateY(20deg);
+  }
+  100% {
+    transform: translate3d(-20px, 105vh, 0) rotate(240deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* Variant 2 (Stronger drift left-to-right, tumbling flip) */
+@keyframes floatLeafFluid2 {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(35deg) scale(0.7);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  40% {
+    transform: translate3d(-70px, 35vh, 0) rotate(15deg) scale(0.85) rotateX(40deg);
+  }
+  70% {
+    transform: translate3d(55px, 75vh, 0) rotate(140deg) scale(0.95) rotateX(-40deg);
+  }
+  100% {
+    transform: translate3d(-10px, 105vh, 0) rotate(260deg) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* Variant 3 (Mellow deep zigzag, spinning slow) */
+@keyframes floatLeafFluid3 {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(-25deg) scale(0.9);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  35% {
+    transform: translate3d(40px, 30vh, 0) rotate(-70deg) scale(0.8) rotateZ(20deg);
+  }
+  65% {
+    transform: translate3d(-65px, 65vh, 0) rotate(-150deg) scale(1) rotateZ(-20deg);
+  }
+  100% {
+    transform: translate3d(20px, 105vh, 0) rotate(-260deg) scale(0.75);
+    opacity: 0;
+  }
+}
+
+/* Variant 4 (Narrow fast flutter with slight bouncy motion) */
+@keyframes floatLeafFluid4 {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(15deg) scale(0.75);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate3d(-30px, 20vh, 0) rotate(90deg) scale(0.85) skewY(8deg);
+  }
+  50% {
+    transform: translate3d(25px, 48vh, 0) rotate(180deg) scale(0.75) skewY(-8deg);
+  }
+  75% {
+    transform: translate3d(-25px, 78vh, 0) rotate(270deg) scale(0.85) skewY(4deg);
+  }
+  100% {
+    transform: translate3d(10px, 105vh, 0) rotate(360deg) scale(0.65);
+    opacity: 0;
+  }
+}
+
+.floating-leaf-fluid-v1 {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatLeafFluid1 9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.floating-leaf-fluid-v2 {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatLeafFluid2 8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.floating-leaf-fluid-v3 {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatLeafFluid3 11s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.floating-leaf-fluid-v4 {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatLeafFluid4 7s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+}
+
+/* Stretched custom ripple expand */
+@keyframes ripple-expand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+  }
+  100% {
+    width: 250px;
+    height: 250px;
+    opacity: 0;
+  }
+}
+
+

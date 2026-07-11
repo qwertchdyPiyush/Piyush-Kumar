@@ -1,0 +1,6 @@
+{
+  "name": "The Quiet Engineer Portfolio Concept Board",
+  "description": "An interactive premium UI/UX concept board for a developer portfolio. Merging wabi-sabi minimalism, Indian coffee house warmth, and modern editorial layout. Featuring interactive paper physics, dynamic color palette, tactile texture overlays, custom cursors, and an AI journal typewriter.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
